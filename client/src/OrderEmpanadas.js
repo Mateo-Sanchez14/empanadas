@@ -1,7 +1,7 @@
 // OrderEmpanadas.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel, FormControl, List, ListItem, ListItemText } from '@mui/material';
+import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel, FormControl, List, ListItem, ListItemText, Link } from '@mui/material';
 
 const empanadaTypes = ['Carne', 'Pollo', 'Queso', 'Jamón y Queso'];
 
@@ -63,7 +63,7 @@ const OrderEmpanadas = () => {
             ) : (
                 <>
                     <Typography variant="h6" gutterBottom>
-                        Pedido link: {shareableLink}
+                        Pedido link: <Link>{shareableLink}</Link>
                     </Typography>
                     <FormControl fullWidth margin="normal">
                         <InputLabel>Tipo de Empanada</InputLabel>
