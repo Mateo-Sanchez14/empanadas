@@ -27,7 +27,7 @@ const OrderEmpanadas = () => {
         const response = await axios.post('create-order/');
         const newOrderId = response.data.orderId;
         setOrderId(newOrderId);
-        const shareableLink = `${window.location.origin}?orderId=${newOrderId}/`;
+        const shareableLink = `${window.location.origin}?orderId=${newOrderId}`;
         setShareableLink(shareableLink);
         navigator.clipboard.writeText(shareableLink);
         alert(`Link para compartir copiado: ${shareableLink}`);
