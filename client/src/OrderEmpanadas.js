@@ -5,13 +5,14 @@ import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel,
 
 const empanadaTypes = ['Carne', 'Pollo', 'Queso', 'Jamón y Queso'];
 
-axios.defaults.baseURL = 'http://0.0.0.0:5001/';
+axios.defaults.baseURL = 'http://186.123.84.140:5001/';
 
 const OrderEmpanadas = () => {
     const [orderId, setOrderId] = useState(null);
     const [empanadaType, setEmpanadaType] = useState('');
     const [quantity, setQuantity] = useState('');
     const [empanadasList, setEmpanadasList] = useState({});
+    const [shareableLink, setShareableLink] = useState('');
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search);
@@ -27,6 +28,7 @@ const OrderEmpanadas = () => {
         const newOrderId = response.data.orderId;
         setOrderId(newOrderId);
         const shareableLink = `${window.location.origin}?orderId=${newOrderId}/`;
+        setShareableLink(shareableLink);
         navigator.clipboard.writeText(shareableLink);
         alert(`Link para compartir copiado: ${shareableLink}`);
     };
@@ -60,6 +62,9 @@ const OrderEmpanadas = () => {
                 </Button>
             ) : (
                 <>
+                    <Typography variant="h6" gutterBottom>
+                        Pedido link: {shareableLink}
+                    </Typography>
                     <FormControl fullWidth margin="normal">
                         <InputLabel>Tipo de Empanada</InputLabel>
                         <Select
