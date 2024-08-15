@@ -21,7 +21,7 @@ const OrderEmpanadas = () => {
     }, []);
 
     const createOrder = async () => {
-        const response = await axios.post('http://localhost:8000/create-order');
+        const response = await axios.post('http://localhost:5001/create-order');
         const newOrderId = response.data.orderId;
         setOrderId(newOrderId);
         const shareableLink = `${window.location.origin}?orderId=${newOrderId}`;
@@ -31,7 +31,7 @@ const OrderEmpanadas = () => {
 
     const addEmpanada = async () => {
         if (empanadaType && quantity) {
-            await axios.post('http://localhost:8000/add-empanada', {
+            await axios.post('http://localhost:5001/add-empanada', {
                 orderId,
                 empanadaType,
                 quantity: parseInt(quantity)
@@ -43,7 +43,7 @@ const OrderEmpanadas = () => {
     };
 
     const getOrder = async (orderId) => {
-        const response = await axios.get(`http://localhost:8000/get-order/${orderId}`);
+        const response = await axios.get(`http://localhost:5001/get-order/${orderId}`);
         setEmpanadasList(response.data.empanadas);
     };
 
