@@ -1,9 +1,11 @@
 // OrderEmpanadas.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel, FormControl, List, ListItem, ListItemText, Link } from '@mui/material';
+import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel, FormControl, List, ListItem, ListItemText, Link, Chip } from '@mui/material';
 
-const empanadaTypes = ['Carne', 'Pollo', 'Queso', 'Jamón y Queso'];
+import './Empanadas.css';
+
+const empanadaTypes = ['Carne', 'Pollo', 'Queso', 'Jamón y Queso', 'Humita', 'Caprese', 'Verdura', 'Ternera', 'Cebolla y Queso', 'Cantimpalo'];
 
 axios.defaults.baseURL = 'http://empanadas.msanchez.tech/api/';
 
@@ -51,6 +53,10 @@ const OrderEmpanadas = () => {
         setEmpanadasList(response.data.empanadas);
     };
 
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(shareableLink);
+    }
+
     return (
         <Container>
             <Typography variant="h4" gutterBottom>
@@ -63,7 +69,8 @@ const OrderEmpanadas = () => {
             ) : (
                 <>
                     <Typography variant="h6" gutterBottom>
-                        Pedido link: <Link>{shareableLink}</Link>
+                        Pedido link: {' '}
+                        <Chip variant="outlined" color="info" size="small" label={shareableLink} onClick={copyToClipboard} />
                     </Typography>
                     <FormControl fullWidth margin="normal">
                         <InputLabel>Tipo de Empanada</InputLabel>
@@ -86,12 +93,14 @@ const OrderEmpanadas = () => {
                         fullWidth
                         margin="normal"
                     />
-                    <Button variant="contained" color="primary" onClick={addEmpanada}>
-                        Guardar Pedido
-                    </Button>
-                    <Button variant="contained" color="secondary" onClick={() => getOrder(orderId)} style={{ marginTop: 20 }}>
-                        Ver Pedido
-                    </Button>
+                    <div className='Button-container'>
+                      <Button variant="contained" color="primary" onClick={addEmpanada}>
+                          Cargar al Pedido
+                      </Button>
+                      <Button variant="contained" color="secondary" onClick={() => getOrder(orderId)}>
+                          Recargar Pedido
+                      </Button>
+                    </div>
 
                     <List>
                         {Object.keys(empanadasList).map((type, index) => (
