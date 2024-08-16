@@ -5,7 +5,7 @@ import { Button, TextField, Container, Typography, MenuItem, Select, InputLabel,
 
 const empanadaTypes = ['Carne', 'Pollo', 'Queso', 'Jamón y Queso'];
 
-axios.defaults.baseURL = 'http://186.123.84.140:5001/';
+axios.defaults.baseURL = 'http://empanadas.msanchez.tech/api/';
 
 const OrderEmpanadas = () => {
     const [orderId, setOrderId] = useState(null);

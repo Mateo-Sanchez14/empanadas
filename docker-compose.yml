@@ -24,3 +24,8 @@ services:
       - ./client:/app
     environment:
       - NODE_ENV=production
+
+networks:
+  default:
+    external:
+      name: empanadas_network

@@ -9,13 +9,13 @@ app.use(express.json());
 
 let orders = {};
 
-app.post('/create-order', (req, res) => {
+app.post('/api/create-order', (req, res) => {
     const orderId = uuidv4();
     orders[orderId] = {};
     res.json({ orderId });
 });
 
-app.post('/add-empanada', (req, res) => {
+app.post('/api/add-empanada', (req, res) => {
     const { orderId, empanadaType, quantity } = req.body;
     if (orders[orderId]) {
         if (!orders[orderId][empanadaType]) {
@@ -28,7 +28,7 @@ app.post('/add-empanada', (req, res) => {
     }
 });
 
-app.get('/get-order/:id', (req, res) => {
+app.get('/api/get-order/:id', (req, res) => {
     const { id } = req.params;
     if (orders[id]) {
         res.json({ empanadas: orders[id] });
